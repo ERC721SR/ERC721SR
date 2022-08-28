@@ -8,8 +8,6 @@ import '@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol';
 
 contract ERC721SR is IERC721SR, ERC721 {
   using SafeERC20 for IERC20;
-  // token hold start time
-  mapping(uint256 => uint256) public holdTime;
 
   // One epoch one day
   uint256 public constant EpochLength = 86400;
@@ -83,14 +81,13 @@ contract ERC721SR is IERC721SR, ERC721 {
   }
 
   /**
-   * @dev refresh hold time
+   * @dev I'm considering whether it is necessary
    */
   function _afterTokenTransfer(
-    address from,
-    address to,
-    uint256 tokenId
+    address,
+    address,
+    uint256
   ) internal virtual override {
-    holdTime[tokenId] = block.timestamp;
     _checkEpoch();
   }
 }
