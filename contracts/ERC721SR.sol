@@ -53,7 +53,7 @@ contract ERC721SR is IERC721SR, ERC721 {
     if (block.timestamp - lastEpochTime > EpochLength) {
       uint256 n = (block.timestamp - lastEpochTime) / EpochLength;
       currentEpoch += n;
-      lastEpochTime = block.timestamp + n * EpochLength;
+      lastEpochTime += n * EpochLength;
 
       for (uint256 i = 0; i < tokenLists.length; i++) {
         IERC20 token = tokenLists[i];
